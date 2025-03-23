@@ -12,9 +12,9 @@ This repository contains the official implementation of our paper **"SeqCSIST: S
 
 ## Model
 Our model consists of three main modules:
-- **[sparsity-driven feature extraction module]**: []
-- **[positional encoding module]**: []
-- **[emporal Deformable Feature Alignment (TDFA) module]**: []
+- **[Sparsity-driven Feature Extraction module]**: []
+- **[Positional Encoding module]**: []
+- **[Temporal Deformable Feature Alignment (TDFA) module]**: []
 
 ### Architecture
 ![Model Architecture]()
