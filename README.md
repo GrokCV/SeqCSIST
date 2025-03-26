@@ -75,7 +75,7 @@ Our method achieves state-of-the-art performance on SeqCSIST Task
 
 ### 🎥 Visualization
 
-## Citation
+## 🔍 Citation
 If you find this work useful, please cite our paper:
 ```
 @article{zhai2025seqcsist,
