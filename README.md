@@ -1,25 +1,47 @@
 # SeqCSIST: Sequential Closely-Spaced Infrared Small Target Unmixing
 
-## Introduction
+## 📘 Introduction
 This repository contains the official implementation of our paper **"SeqCSIST: Sequential Closely-Spaced Infrared Small Target Unmixing"**. Our work introduces:
 - **A novel task**: CSIST Unmixing, which aims to detect [all targets in the form of sub-pixel localization from a highly dense CSIST group].
 - **A new dataset**: SeqCSIST, specifically designed for [multi-frame CSIST Umixing].
 - **An End-to-End Framework**: Our approach outperforms existing methods by [].
 
-## Dataset
+## 🗂 Dataset
 - **Number of samples**: [100,000 frames organized into 5,000 random trajectories]
 - **Download**: []
 
-## Model
+## 🔧 Model
 Our model consists of three main modules:
 - **[Sparsity-driven Feature Extraction module]**: []
 - **[Positional Encoding module]**: []
 - **[Temporal Deformable Feature Alignment (TDFA) module]**: []
 
-### Architecture
+### 🏗 Architecture
 ![Model Architecture](picture/DeRefNet.png)
 
-## Comparison with state-of-the-art methods
+## ⚙ Installation
+To set up the environment, run:
+```bash
+conda env create -f environment.yml
+conda activate speed
+mim install mmcv==2.0.1
+```
+
+## 🚀 Training
+To train the model, run:
+```bash
+
+```
+
+## 🎯 Evaluation
+To evaluate on the test set, run:
+```bash
+
+```
+
+## 🏆 Results
+Our method achieves state-of-the-art performance on SeqCSIST Task
+### 📊 Comparison with state-of-the-art methods
 ---
 
 | Method                  | Params  | FLOPs    | CSO-mAP  | AP₀₅  | AP₁₀  | AP₁₅  | AP₂₀  | AP₂₅  |
@@ -51,30 +73,7 @@ Our model consists of three main modules:
 | RPCANet             | 0.68 M   | 14.81 G   | 47.17     | 0.70   | 10.20  | 44.50  | 84.60  | 95.90  |
 | **DeRefNet (Ours)**     | 0.89 M   | 15.70 G   | **51.55** | 1.00   | 14.40  | 54.90  | 90.40  | 97.10  |
 
-
-## Installation
-To set up the environment, run:
-```bash
-conda env create -f environment.yml
-conda activate speed
-mim install mmcv==2.0.1
-```
-
-## Training
-To train the model, run:
-```bash
-
-```
-
-## Evaluation
-To evaluate on the test set, run:
-```bash
-
-```
-
-## Results
-Our method achieves state-of-the-art performance on SeqCSIST Task:
-
+### 🎥 Visualization
 
 ## Citation
 If you find this work useful, please cite our paper:
