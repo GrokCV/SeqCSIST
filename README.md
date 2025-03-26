@@ -30,7 +30,7 @@ mim install mmcv==2.0.1
 ## 🚀 Training
 To train the model, run:
 ```bash
-
+CUDA_VISIBLE_DEVICES=0,1,2,3 tools/dist_train.sh configs/configs/DeRefNet.py 4
 ```
 
 ## 🎯 Evaluation
