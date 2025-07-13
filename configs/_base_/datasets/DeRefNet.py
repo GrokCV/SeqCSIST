@@ -2,12 +2,12 @@ train_dataset_type = 'TrainDataset_Phix'
 dataset_type = 'Val_Test_Dataset'
 
 # 训练集位置
-train_data_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/train/image'
-val_data_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/val/image'
-test_data_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/test/image'
-val_xml_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/val/annotation'
-test_xml_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/test/annotation'
-train_xml_root = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/train/annotation'
+train_data_root = 'SeqCSIST/data/track_5000_20/train/image'
+val_data_root = 'SeqCSIST/data/track_5000_20/val/image'
+test_data_root = 'SeqCSIST/data/track_5000_20/test/image'
+val_xml_root = 'SeqCSIST/data/track_5000_20/val/annotation'
+test_xml_root = 'SeqCSIST/data/track_5000_20/test/annotation'
+train_xml_root = 'SeqCSIST/data/track_5000_20/train/annotation'
 
 train_dataloader = dict(
   batch_size=20,

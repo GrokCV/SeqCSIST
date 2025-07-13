@@ -53,7 +53,6 @@ class GMFNNet(BaseModel):
         elif mode == 'predict':
             return [final[2:18], image_name, targets_GT]
         elif mode == 'loss':
-            # 回归损失
             loss_fg_all = 0
             loss_fg_all = self.fg_loss(final[2:18], batch_x[2:18])
             loss_all = loss_fg_all 

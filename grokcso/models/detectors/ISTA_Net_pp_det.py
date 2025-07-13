@@ -17,7 +17,7 @@ class ISTA_Net_pp(BaseModel):
     def __init__(self, LayerNo):
         super(ISTA_Net_pp, self).__init__()
         
-        Phi_lrs_Name = '/opt/data/private/Simon/DeRefNet/data/phi_0.5.mat'
+        Phi_lrs_Name = 'SeqCSIST/data/phi_0.5.mat'
         Phi_lrs = sio.loadmat(Phi_lrs_Name)
         Phi_input = Phi_lrs['phi']
         self.Phi = torch.from_numpy(Phi_input).type(torch.FloatTensor).to(device)

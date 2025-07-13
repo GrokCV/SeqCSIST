@@ -18,12 +18,12 @@ class FISTANet(BaseModel):
 
         self.LayerNo = LayerNo
 
-        Phi_data_Name = '/opt/data/private/Simon/DeRefNet/data/phi_0.5.mat'
+        Phi_data_Name = 'SeqCSIST/data/phi_0.5.mat'
         Phi_data = sio.loadmat(Phi_data_Name)
         Phi = Phi_data['phi']
         self.Phi = torch.from_numpy(Phi).type(torch.FloatTensor).to(device)
 
-        Qinit_Name = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/train/qinit.mat'
+        Qinit_Name = 'SeqCSIST/data/track_5000_20/train/qinit.mat'
         Qinit_data = sio.loadmat(Qinit_Name)
         Qinit = Qinit_data['Qinit']
         self.Qinit = torch.from_numpy(Qinit).type(torch.FloatTensor).to(device)

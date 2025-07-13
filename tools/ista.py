@@ -12,7 +12,7 @@ import json
 import shutil
 import time
 
-Phi_data_Name = '/opt/data/private/Simon/DeRefNet/data/phi_0.5.mat'
+Phi_data_Name = 'SeqCSIST/data/phi_0.5.mat'
 Phi_data = sio.loadmat(Phi_data_Name)
 Phi_input = Phi_data['phi']
 A = Phi_input
@@ -36,30 +36,6 @@ def ista(A, y, lambda_, max_iter=3000, tol=1e-4):
 # lambda_ = 27
 lambda_ = 1
 
-# # 使用 ISTA 求解 Lasso 问题
-# y_hat = ista(A, y, lambda_)
-#
-# y_hat = np.array(y_hat)
-#
-# titles = ["Original Image", "ISTA Output", "GT Image"]
-# plt.figure(figsize=(12, 4))
-# plt.subplot(131)  # 子图1
-# plt.imshow(image, cmap='gray')
-# plt.title(titles[0])
-#
-# image = y_hat.reshape(33, 33)
-#
-# plt.subplot(132)  # 子图2
-# plt.imshow(image, cmap='gray')
-# plt.title(titles[1])
-#
-# plt.subplot(133)  # 子图1
-# plt.imshow(gt, cmap='gray')
-# plt.title(titles[2])
-#
-# plt.show()
-# print("ok")
-
 
 def error(msg):
     print(msg)
@@ -71,7 +47,7 @@ def calculate_distance(xc, yc, xp, yp):
   return distance
 
 
-# 计算ap，核心代码，只要输入查准率和查全率的列表，就能计算ap
+# calculate ap，main code
 def voc_ap(rec, prec):
     rec.insert(0, 0.0)  # insert 0.0 at beginning of list
     rec.append(1.0)  # insert 1.0 at end of list
@@ -91,7 +67,6 @@ def voc_ap(rec, prec):
     return ap, m_rec, m_pre
 
 
-# 将文件按行存储到列表中
 def file_lines_to_list(path):
     # open txt file lines to a list
     with open(path) as f:
@@ -102,7 +77,7 @@ def file_lines_to_list(path):
 
 
 def read_targets_from_xml(xml_file_path):
-  """解析XML文件，获取单张图片的所有信息"""
+  """load XML files"""
   tree = ET.parse(xml_file_path)
   root = tree.getroot()
   targets_GT = []
@@ -125,7 +100,7 @@ if not os.path.exists(save_dir_pred):
 
 for i in range(0, 15000):
   image = np.array(Image.open(
-    f'/opt/data/private/Simon/DeRefNet/data/track_5000_20/test/image/image_{i}.png'
+    f'SeqCSIST/data/track_5000_20/test/image/image_{i}.png'
     ))
   img_name = f'image_{i}.png'
   result_dir = os.path.join("work_dir/outputs", "CSO_ista")
@@ -148,9 +123,9 @@ for i in range(0, 15000):
   x_output = np.array(x_output)
 
   brightness_threshold = 70
-  # 将x_output中小于70的值置为0
+  
   x_output[x_output < brightness_threshold] = 0
-  # 对x_output每一行处理
+  
 
   matrix = x_output.reshape(33, 33)
   if i < 80:
@@ -160,8 +135,8 @@ for i in range(0, 15000):
     # plt.title(titles[2])
   
     plt.savefig(os.path.join(save_dir_pred,f"{img_name}_{i}.png"), bbox_inches='tight', pad_inches=0, dpi=300)
-    plt.close()  # 关闭图像窗口，释放内存
-  # 找出非零值所在的行号和列号
+    plt.close()  
+  
   non_zero_indices = np.nonzero(matrix)
   txt_name = img_name[:-len(".png")] + ".txt"
   txt_path = os.path.join(result_dir, txt_name)
@@ -176,7 +151,7 @@ for i in range(0, 15000):
 print("average time:", total_time / count)
 
 def compute():
-    GT_PATH = "/opt/data/private/Simon/DeRefNet/data/track_5000_20/test/annotation"
+    GT_PATH = "SeqCSIST/data/track_5000_20/test/annotation"
     DR_PATH = os.path.join("work_dir/outputs", "CSO_ista")
 
     cso_mAP = 0

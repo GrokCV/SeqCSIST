@@ -25,7 +25,7 @@ def diffusion(x, y, target_x, target_y, ai, sigma):
                                 + (y - target_y) ** 2) / (2 * sigma ** 2))
 
 
-# # 计算像元的幅度响应
+# 计算像元的幅度响应
 def calculate_pixel_response(pixel_x, pixel_y, target_info, sigma):
   """计算像元灰度值"""
   response = 0.0
@@ -81,7 +81,7 @@ def show_contrast(gt, pred, batch_idx, idx, img_name, name, c=3):
   # 创建图像绘制环境
   plt.figure()  # 创建一个8x4英寸大小的图像窗口
   
-  image_path = os.path.join('/opt/data/private/Simon/DeRefNet/data/track_5000_20/test/image', name)
+  image_path = os.path.join('SeqCSIST/data/track_5000_20/test/image', name)
   img = Image.open(image_path)
   Phix_image = np.array(img)
   # # # 绘制第一张图像

@@ -63,7 +63,7 @@ class CSO_Metrics(BaseMetric):
                             (col - 1) / 3,
                             value])
         
-            # result_dir = '/opt/data/private/Simon/DeRefNet/work_dirs/temp'
+            # result_dir = 'SeqCSIST/work_dirs/temp'
             # if not os.path.exists(result_dir):
             #         os.makedirs(result_dir)
             # txt_name = img_name[idx+2][:-len(".png")] + ".txt"

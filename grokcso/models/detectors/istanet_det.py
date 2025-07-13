@@ -18,12 +18,12 @@ class ISTANet(BaseModel):
 
         super(ISTANet, self).__init__()
 
-        Phi_lrs_Name = '/opt/data/private/Simon/DeRefNet/data/phi_0.5.mat'
+        Phi_lrs_Name = 'SeqCSIST/data/phi_0.5.mat'
         Phi_lrs = sio.loadmat(Phi_lrs_Name)
         Phi_input = Phi_lrs['phi']
         self.Phi = torch.from_numpy(Phi_input).type(torch.FloatTensor).to(device)
 
-        Qinit_Name = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/train/qinit.mat'
+        Qinit_Name = 'SeqCSIST/data/track_5000_20/train/qinit.mat'
         Qinit_lrs = sio.loadmat(Qinit_Name)
         Qinit = Qinit_lrs['Qinit']
         self.Qinit = torch.from_numpy(Qinit).type(torch.FloatTensor).to(device)
@@ -77,7 +77,6 @@ class ISTANet(BaseModel):
         elif mode == 'predict':
             return [x_final[2:18,:], image_name, targets_GT]
         elif mode == 'loss':
-            # 特征提取损失
             loss_discrepancy = self.discrepancy(x_final[2:18,:], batch_x[2:18,:])
             loss_constraint = torch.mean(torch.pow(layers_sym[0], 2))
             for k in range(7):

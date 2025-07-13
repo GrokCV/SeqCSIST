@@ -27,8 +27,6 @@ class AugmentedDeformConv2dPack(DeformConv2d):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        # del self.weight  # 用动态权重替换 DeformConv2d 固有权重 self.weight 会默认存在但未使用，即存在不参与损失计算的参数，导致报错，所以要删除
-        
         self.conv_offset = nn.Conv2d(
             self.in_channels,
             self.deform_groups * 2 * self.kernel_size[0] * self.kernel_size[1],
@@ -126,7 +124,7 @@ class TDDA(nn.Module):
             nn.Conv2d(mid_channels, out_channels, 3, 1, 1, bias=False))
     
     def generate_positional_encoding(self, seq_len, feature_dim):
-        # 定义时间步长向量
+        # Define the time step vector
         time_steps = torch.arange(seq_len).view(-1, 1)  # 形状为 (20, 1)
         pe = time_steps.repeat(1, feature_dim) 
         pe = pe / 20
@@ -144,12 +142,12 @@ class TDDA(nn.Module):
         x = x.view(-1, 1, 33, 33)
     
         # alignment of frames
-        index = []   # 序列索引
-        final = []   # 用于存储每个序列的检测结果
+        index = []   
+        final = []   
         aligned_imgs = {}
-        for j in range(2 ,t-2):     # 对第 j 个序列进行处理   #改帧
+        for j in range(2 ,t-2):     
             aligned_fea = []
-            for i in range(-2,3):   # 改帧
+            for i in range(-2,3):   
                 m = j+i
                 feat_center = x[j, :, :, :].contiguous()
                 feat_center = feat_center.view(1, -1, 33, 33)
@@ -168,7 +166,7 @@ class TDDA(nn.Module):
 
             # output center frame and the aligned frames
             x_final = self.tail_conv(aligned_fea).view(1, hw)
-            aligned_fea = aligned_fea.view(5, hw)       # 改帧
+            aligned_fea = aligned_fea.view(5, hw)       
             index.append(j)
             final.append(x_final)
             aligned_imgs[j] = aligned_fea
@@ -184,11 +182,11 @@ class SK(nn.Module):
         dim 必须是一个正整数且大于等于 2。
     """
     super().__init__()
-    # 将输入通道数减半的卷积层
+    
     self.conv0_s = nn.Conv2d(dim, dim // 2, 1)
-    # 将输入通道数减半的卷积层（与conv0_s并行）
+    
     self.conv1_s = nn.Conv2d(dim, dim // 2, 1)
-    # 压缩特征图通道的卷积层
+    
     self.conv_squeeze = nn.Conv2d(2, 2, 3, padding=1)
 
   def forward(self, x, y):
@@ -196,22 +194,18 @@ class SK(nn.Module):
     attn1 = x
     attn2 = y
 
-    # 通过不同的卷积层处理特征图
+    
     attn1 = self.conv0_s(attn1)
     attn2 = self.conv1_s(attn2)
     
-    # 在通道维度上拼接处理后的特征图
+    
     attn = torch.cat([attn1, attn2], dim=1)
-    # 计算平均注意力
     avg_attn = torch.mean(attn, dim=1, keepdim=True)
-    # 计算最大注意力
     max_attn, _ = torch.max(attn, dim=1, keepdim=True)
-    # 拼接平均和最大注意力特征
     agg = torch.cat([avg_attn, max_attn], dim=1)
-    # 压缩特征并应用 sigmoid 激活函数
     sig = self.conv_squeeze(agg).sigmoid()
 
-    # 应用注意力权重
+    
     att1 = attn1 * sig[:, 0, :, :].unsqueeze(1)
     att2 = attn2 * sig[:, 1, :, :].unsqueeze(1)
     

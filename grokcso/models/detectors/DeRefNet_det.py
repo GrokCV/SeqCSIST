@@ -18,12 +18,12 @@ class DeRefNet(BaseModel):
 
         super(DeRefNet, self).__init__()
 
-        Phi_lrs_Name = '/opt/data/private/Simon/DeRefNet/data/phi_0.5.mat'
+        Phi_lrs_Name = 'SeqCSIST/data/phi_0.5.mat'
         Phi_lrs = sio.loadmat(Phi_lrs_Name)
         Phi_input = Phi_lrs['phi']
         self.Phi = torch.from_numpy(Phi_input).type(torch.FloatTensor).to(device)
 
-        Qinit_Name = '/opt/data/private/Simon/DeRefNet/data/track_5000_20/train/qinit.mat'
+        Qinit_Name = 'SeqCSIST/data/track_5000_20/train/qinit.mat'
         Qinit_lrs = sio.loadmat(Qinit_Name)
         Qinit = Qinit_lrs['Qinit']
         self.Qinit = torch.from_numpy(Qinit).type(torch.FloatTensor).to(device)
@@ -80,11 +80,11 @@ class DeRefNet(BaseModel):
             final = torch.cat(final, dim=0)
             return [final, image_name, targets_GT, x, index]
         elif mode == 'loss':
-            # 特征提取损失
+            # Feature extraction loss
             loss_constraint = torch.mean(torch.pow(layers_sym[0], 2))
             for k in range(self.LayerNo-1):
                 loss_constraint += torch.mean(torch.pow(layers_sym[k + 1], 2))
-            # 将对齐后的支持帧扩展为5维，计算对齐损失
+            # Expand the aligned support frame to 5 dimensions and calculate the alignment loss
             loss_pix_lq_all = 0
             for i in range(len(index)):
                 m = index[i]
@@ -92,13 +92,13 @@ class DeRefNet(BaseModel):
                 alignments = torch.cat((aligned_imgs[m][:2], aligned_imgs[m][3:]), dim=0)
                 loss_pix_lq = torch.sum(torch.abs(alignments-lq_ref))
                 loss_pix_lq_all += loss_pix_lq
-            # 回归损失
+            # Regression Loss
             loss_fg_all = 0
             for i in range(len(index)):
                 n = index[i]
                 loss_fg = self.fg_loss(final[i], batch_x[n])
                 loss_fg_all += loss_fg
-            # 按权重计算总损失
+            # Calculate the total loss by weight
             alpha = torch.Tensor([0.1]).to(device)
             gamma = torch.Tensor([0.1]).to(device)
             loss_all = torch.mul(gamma, loss_constraint)+ loss_fg_all + torch.mul(alpha, loss_pix_lq_all) 
