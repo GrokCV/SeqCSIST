@@ -8,13 +8,13 @@ This repository contains the official implementation of our paper **"SeqCSIST: S
 
 ## 🗂 Dataset
 - **Number of samples**: [100,000 frames organized into 5,000 random trajectories]
-- **Download**: [链接: https://pan.baidu.com/s/1_sxGh5oFQ8-3RpUUeMN2Mg?pwd=kxe9 提取码: kxe9]
+- **Download**: [https://pan.baidu.com/s/1_sxGh5oFQ8-3RpUUeMN2Mg?pwd=kxe9]
 
 ## 🔧 Model
 Our model consists of three main modules:
-- **[Sparsity-driven Feature Extraction module]**: []
-- **[Positional Encoding module]**: []
-- **[Temporal Deformable Feature Alignment (TDFA) module]**: []
+- **[Sparsity-driven Feature Extraction module]**: [Distinct from conventional approaches that rely on generic ResNet backbones for feature extraction, DeRefNet fully considers the sparsity prior of targets and achieves effective extraction of CSIST features through nonlinear learnable and sparsifying transforms.]
+- **[Positional Encoding module]**: [To enable finer sub-pixel target localization, a positional encoding module is utilized to enhance temporal information.]
+- **[Temporal Deformable Feature Alignment (TDFA) module]**: [The TDFA module enables dynamic reference-based refinement for middle frame, which is processed through multi-frame deformable alignment at a feature level without explicit motion estimation and image wrapping operations.]
 
 ### 🏗 Architecture
 ![Model Architecture](picture/DeRefNet.png)
@@ -82,8 +82,6 @@ Our method achieves state-of-the-art performance on SeqCSIST Task
 ### 🎥 Visualization
 
 ![Visualization](picture/result.png)
-
-
 
 ## 🔍 Citation
 If you find this work useful, please cite our paper:
