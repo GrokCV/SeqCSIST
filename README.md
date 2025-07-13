@@ -51,8 +51,8 @@ Our method achieves state-of-the-art performance on SeqCSIST Task
 ---
 
 | Method                | FPS | Params  | FLOPs    | CSO-mAP  | AP₀₅  | AP₁₀  | AP₁₅  | AP₂₀  | AP₂₅  |
-| :------------------------------: | :-----: | :----: | :-----: | :---: | :---: | :---: | :---: | :---: |
-| **Traditional Optimization** |          |           |           |        |        |        |        |        |
+| :------------------------------: | :-----: | :----: | :-----: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Traditional Optimization** |      |    |           |           |        |        |        |        |        |
 | ISTA             | 0.1 | -        | 398.57 M  | 10.72     | 0.14   | 1.97   | 8.74   | 18.22  | 24.53  |
 | BID              | 0.1 | -        | 10.89 M   | 14.40     | 0.00   | 3.00   | 13.00  | 26.00  | 30.00  |
 | **Image Super-Resolution**   |   |       |           |           |        |        |        |        |        |
