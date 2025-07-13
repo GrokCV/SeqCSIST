@@ -4,7 +4,7 @@
 This repository contains the official implementation of our paper **"SeqCSIST: Sequential Closely-Spaced Infrared Small Target Unmixing"**. Our work introduces:
 - **A novel task**: CSIST Unmixing, which aims to detect [all targets in the form of sub-pixel localization from a highly dense CSIST group].
 - **A new dataset**: SeqCSIST, specifically designed for [multi-frame CSIST Umixing].
-- **An End-to-End Framework**: Our approach outperforms existing methods by [].
+- **An End-to-End Framework**: Our approach outperforms baseline by [5.3%].
 
 ## 🗂 Dataset
 - **Number of samples**: [100,000 frames organized into 5,000 random trajectories]
