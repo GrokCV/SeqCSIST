@@ -88,9 +88,10 @@ If you find this work useful, please cite our paper:
 ```
 @article{zhai2025seqcsist,
   title={SeqCSIST: Sequential Closely-Spaced Infrared Small Target Unmixing},
-  author={Ximeng Zhai, Bohan Xu, Yaohong Chen, Hao Wang, Kehua Guo, Yimian Dai},
-  journal={ArXiv/IEEE Transactions on Geoscience and Remote Sensing},
-  year={2025}
+  author={Zhai, Ximeng and Xu, Bohan and Chen, Yaohong and Wang, Hao and Guo, Kehua and Dai, Yimian},
+  journal={IEEE Transactions on Geoscience and Remote Sensing},
+  year={2025},
+  publisher={IEEE}
 }
 ```
 
